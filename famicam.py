@@ -35,15 +35,32 @@ for index, v in enumerate(views):
 
     print tweet
 
-    if len(faces) > 0:
-	    try:
-		    imgapi = imgur.imgur(apikey=imgur_api_key)
-		    imgurl = imgapi.upload(stamp+".jpg")
-		    api = twitter.Api(username=twitter_user, password=twitter_pass)
-		    status = api.PostUpdate(tweet+" "+imgurl['rsp']['image']['original_image'])
-	    except:
-		    print "Failed!"
-			
+    hist = cv.CreateHist([32], cv.CV_HIST_ARRAY, [[0, 255]], 1)
+
+    cv.CalcHist([img], hist, 0, None)
+    hist_img = cv.CreateImage((32*10,255), 8, 3)
+    (_,max_value,_,_) = cv.GetMinMaxHistValue(hist)
+
+    (sizex, sizey) = cv.GetSize(img)
+
+    darkcount = 0
+    for i in range(8):
+        darkcount = darkcount + cv.QueryHistValue_1D(hist, i)
+
+    if darkcount > (.7 * (sizex * sizey)):
+        print "Image is dark. Not sending data."
+    else:
+        print "Image is light. Sending data."
+	
+        if len(faces) > 0:
+	        try:
+		        imgapi = imgur.imgur(apikey=imgur_api_key)
+		        imgurl = imgapi.upload(stamp+".jpg")
+		        api = twitter.Api(username=twitter_user, password=twitter_pass)
+		        status = api.PostUpdate(tweet+" "+imgurl['rsp']['image']['original_image'])
+	        except:
+		        print "Failed!"
+				
     # Clean up our mess
     os.remove(source)
 
