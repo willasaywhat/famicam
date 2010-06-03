@@ -18,3 +18,4 @@ Remember to set the variables at the beginning of the script to your own setting
 
 - OpenCV 2.0 with the Python extensions
 - pyimgur (Specifically [my fork](http://github.com/abyssknight/pyimgur).)
+- python-twitter
