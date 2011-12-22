@@ -2,11 +2,11 @@
 
 ## Description ##
 
-This script captures a trio of images from a Sony IPELA SNC-RX550N. Following that, it will run a simple face detection script from the OpenCV library. It will then post any photos with greater than zero faces to a twitter account using imgur to post the images. 
+This script captures a trio of images from a Sony IPELA SNC-RX550N. Following that, it will run a simple face detection script from the OpenCV library. It will then post any photos with greater than zero faces to a twitter account using imgur to post the images.
 
 ## Settings ##
 
-Remember to set the variables at the beginning of the script to your own settings. 
+Remember to set the variables at the beginning of the script to your own settings.
 
 - camera_ip: This is the IP or hostname of the IPELA camera.
 - haar_file: On Windows for example, the example haar classifier may be located at: "C:\OpenCV2.0\data\haarcascades\haarcascade_frontalface_default.xml"
